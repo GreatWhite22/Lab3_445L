@@ -17,11 +17,13 @@ void WaitForInterrupt(void);  // low power mode
 #define PF1             (*((volatile uint32_t *)0x40025008))
 #define CLOCK_SPEED			80000000
 
-struct Clock {
-	uint8_t seconds;
-	uint8_t minutes;
-	uint8_t hours;
-}Clock;
+	uint8_t clockSeconds;
+	uint8_t clockMinutes;
+	uint8_t clockHours;
+
+	uint8_t alarmSeconds;
+	uint8_t alarmMinutes;
+	uint8_t alarmHours;
 
 void Timer0A_Init60HzInt(void){
   volatile uint32_t delay;
@@ -45,20 +47,22 @@ void Timer0A_Init60HzInt(void){
 }
 void Timer0A_Handler(void){
   TIMER0_ICR_R = TIMER_ICR_TATOCINT;    // acknowledge timer0A timeout
-	static struct Clock clock;
-	clock.seconds += 1;
-	if(clock.seconds == 60){
-		clock.seconds = 0;
-		clock.minutes += 1;
-		if(clock.minutes == 60){
-			clock.minutes = 0;
-			clock.hours += 1;
+	clockSeconds += 1;
+	if(clockSeconds == 60){
+		clockSeconds = 0;
+		clockMinutes += 1;
+		if(clockMinutes == 60){
+			clockMinutes = 0;
+			clockHours += 1;
 		}
-		if(clock.hours == 13){
-			clock.hours = 1;
+		if(clockHours == 13){
+			clockHours = 1;
 		}
 	}
-	drawClockHands(clock.hours,clock.minutes, 1);
+	drawClockHands(clockHours, clockMinutes, 1);
+	if(alarmHours == clockHours && alarmMinutes == clockMinutes){
+		
+	}
 	 PF2 ^= 0x04;                   // profile
 	
 	

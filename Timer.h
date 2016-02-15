@@ -3,11 +3,13 @@
 
 #include <stdint.h>
 
-//static struct Clock {
-//	uint8_t seconds;
-//	uint8_t minutes;
-//	uint8_t hours;
-//}Clock;
+extern	uint8_t clockSeconds;
+extern	uint8_t clockMinutes;
+extern	uint8_t clockHours;
+
+extern	uint8_t alarmSeconds;
+extern	uint8_t alarmMinutes;
+extern	uint8_t alarmHours;
 
 void Timer0A_Init60HzInt(void);
 void DisableInterrupts(void); // Disable interrupts

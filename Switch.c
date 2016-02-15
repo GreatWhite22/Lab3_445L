@@ -29,6 +29,19 @@ void Switch_Init(void){
 //PF0 is 0x1
 //
 uint32_t portF_Input (void){
-	return PORTF;
+	uint32_t input = 0;
+	if(PORTF && 0x01 == 0x01){
+		return input;
+	}
+	else if(PORTF && 0x02 == 0x02){
+		return input;
+	}
+	else if(PORTF && 0x04 == 0x04){
+		return input;
+	}
+	else if(PORTF && 0x08 == 0x08){
+		return input;
+	}
+	return input;
 }
 

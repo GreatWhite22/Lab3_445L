@@ -1,6 +1,7 @@
 .\alarm_main.o: Alarm_main.c
 .\alarm_main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
 .\alarm_main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\alarm_main.o: ADCSWTrigger.h
 .\alarm_main.o: tm4c123gh6pm.h
 .\alarm_main.o: PLL.h
 .\alarm_main.o: ST7735.h

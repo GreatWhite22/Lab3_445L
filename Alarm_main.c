@@ -7,7 +7,7 @@ This program runs the alarm clock functions
 
 #include <stdint.h>
 #include <stdlib.h>
-//#include "ADCSWTrigger.h"
+#include "ADCSWTrigger.h"
 #include "tm4c123gh6pm.h"
 #include "PLL.h"
 #include "ST7735.h"
@@ -26,11 +26,6 @@ const char SETALARM = 2;
 const char ALARMTONE = 3;
 const char FRUITSCANDY = 0;
 const char MONOTONE = 1;
-
-struct Alarm{
-	uint8_t hour;
-	uint8_t minute;
-}Alarm;
 
 uint32_t hour = 12;
 uint32_t minute = 0;
@@ -82,10 +77,40 @@ int main(void){
 	while(1){
 		if(mode == 0){
 			drawMode(mode);
-				if(portF_Input && 0x1 == 0x1){
+				if(portF_Input() == 1){
 					mode++;
 				}
 			}
+		if(mode == 1){
+			drawMode(mode);
+			if(portF_Input() == 1){
+				mode++;
+			}
+			else if(portF_Input() == 2){
+				clockHours++;
+			}
+			else if(portF_Input() == 3){
+				clockHours--;
+			}
+			else if(portF_Input() == 4){
+				mode--;
+			}
+		}
+		if(mode == 2){
+			drawMode(mode);
+			if(portF_Input() == 1){
+				mode++;
+			}
+			else if(portF_Input() == 2){
+				alarmHours++;
+			}
+			else if(portF_Input() == 3){
+				alarmHours--;
+			}
+			else if(portF_Input() == 4){
+				mode--;
+			}
+		}
 	}
 }
 
