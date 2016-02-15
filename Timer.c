@@ -11,6 +11,7 @@ void WaitForInterrupt(void);  // low power mode
 #include <stdint.h>
 #include "PLL.h"
 #include "tm4c123gh6pm.h"
+#include "Display.h"
 
 #define PF2             (*((volatile uint32_t *)0x40025010))
 #define PF1             (*((volatile uint32_t *)0x40025008))
@@ -57,6 +58,7 @@ void Timer0A_Handler(void){
 			clock.hours = 1;
 		}
 	}
+	drawClockHands(clock.hours,clock.minutes, 1);
 	 PF2 ^= 0x04;                   // profile
 	
 	

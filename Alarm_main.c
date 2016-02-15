@@ -27,6 +27,11 @@ const char ALARMTONE = 3;
 const char FRUITSCANDY = 0;
 const char MONOTONE = 1;
 
+struct Alarm{
+	uint8_t hour;
+	uint8_t minute;
+}Alarm;
+
 uint32_t hour = 12;
 uint32_t minute = 0;
 uint32_t hourTemp = 12;
@@ -57,8 +62,8 @@ int main(void){
 	DisableInterrupts();
 	Timer0A_Init60HzInt();  //updates time every second
 	Timer1_Init();	//sound
-	Timer2_Init();
-	//Switch_Init();					//interrupts on switch press
+	//Timer2_Init();
+	Switch_Init();					//interrupts on switch press
 	ST7735_InitR(INITR_REDTAB);
 	ST7735_PlotClear(0,160);
 		play = 0;
@@ -75,7 +80,12 @@ int main(void){
 		play = 1;
 		TIMER1_CTL_R = 0x00000001;
 	while(1){
-		
+		if(mode == 0){
+			drawMode(mode);
+				if(portF_Input && 0x1 == 0x1){
+					mode++;
+				}
+			}
 	}
 }
 
